@@ -31,7 +31,27 @@ noBtn.addEventListener("mouseover", () => {
     noBtn.style.transition = "transform 0.3s ease";
     noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
 });
+const moveNoButton = () => {
+    const min = 200;
+    const max = 200;
+    const distance = Math.random() * (max - min) + min;
+    const angle = Math.random() * Math.PI * 2;
+    const moveX = Math.cos(angle) * distance;
+    const moveY = Math.sin(angle) * distance;
+    noBtn.style.transition = "transform 0.3s ease";
+    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
 
+    noBtn.style.position = "fixed";
+    noBtn.style.left = `${randomX}px`;
+    noBtn.style.top = `${randomY}px`;
+};
+
+// Handle both Desktop (mouseover) and Mobile (touchstart/click)
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault(); // Prevents accidental clicking
+    moveNoButton();
+});
 // Logic to make YES btn to grow
 // let yesScale = 1;
 // yesBtn.style.position = "relative"
@@ -57,4 +77,5 @@ yesBtn.addEventListener("click", () => {
     document.querySelector(".letter-window").classList.add("final");
     buttons.style.display = "none";
     finalText.style.display = "block";
+
 });
